@@ -33,7 +33,7 @@ $('.toast').toast('show');
             }
           });
 
-          $("#total_pay").change(function(){
+          $("#total_pay").keyup(function(){
             var total_pay = $("#total_pay").val().replace(/\./g, '');
             var total_transaction = $("#total_transaction").val().replace(/\./g, '');
             if(Number(total_pay) > Number(total_transaction)){
@@ -110,9 +110,21 @@ $('.toast').toast('show');
       });
 
       $(document).ready(function () {
-        if( $("#inputKonfirmasiPembayaran").hasClass("is-invalid")){
-          $("#card-detail").slideDown("slow");
-        }else{
+
+          $("#inputKonfirmasiPembayaran").keyup(function(){
+            var konfirmasiBayar = $("#inputKonfirmasiPembayaran").val().replace(/\./g, '');
+            var inputPembayaran = $("#inputPembayaran").val().replace(/\./g, '');
+            if(Number(konfirmasiBayar) === Number(inputPembayaran)){
+              $("#totalPay").hide();
+              $("#inputKonfirmasiPembayaran").removeClass("is-invalid");
+              $("button[name='btnSubmit']").removeAttr("disabled").button('refresh');
+            }else{
+              $("#totalPay").show();
+              $("#inputKonfirmasiPembayaran").addClass("is-invalid");
+              $("btnSubmit").attr("disabled", "disabled");
+              $("button[name='btnSubmit']").attr("disabled", "disabled").button('refresh');
+            }
+          });
 
 
         $('.btn-repayment').click(function () {
@@ -157,7 +169,6 @@ $('.toast').toast('show');
               }
             });
         });
-      }
       });
 
       function closeCard(){

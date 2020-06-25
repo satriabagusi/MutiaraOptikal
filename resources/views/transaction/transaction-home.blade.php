@@ -7,6 +7,23 @@
     <!-- Image and text -->
 
 
+    
+    @if (Session::has('message'))
+    <div role="alert" aria-live="assertive" aria-atomic="true" class="toast mr-5" style="position: absolute; top: 25; right:0;z-index: 9999;" data-autohide="false">
+      <div class="toast-header">
+        <img src="{{url('img/avatar.png')}}" width="20px" class="rounded mr-2" alt="...">
+        <strong class="mr-auto">Mutiara Optikal</strong>
+        <small>{{date('H:i:s')}}</small>
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="toast-body">
+        {{ Session::get('message') }}
+      </div>
+    </div>
+    @endif
+
         <div class="container-fluid mt-5">
 
             <!-- Page Heading -->
@@ -51,6 +68,8 @@
                     </div>
               </div>
             </div>
+
+            
   
           </div>
           <!-- /.container-fluid -->

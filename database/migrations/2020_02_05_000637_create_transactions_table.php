@@ -21,7 +21,8 @@ class CreateTransactionsTable extends Migration
             $table->integer('lens_price');
             $table->integer('total_pay');
             $table->integer('total_transaction');
-            $table->string('transaction_status');
+            $table->integer('transaction_status');
+            $table->integer('taken_status');
             $table->text('keterangan')->nullable();
             $table->integer('id_user')->unsigned();
             $table->integer('id_patient')->unsigned();

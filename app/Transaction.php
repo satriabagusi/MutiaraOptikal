@@ -19,6 +19,7 @@ class Transaction extends Model
         'id_patient',
         'id_frame',
         'updated_by',
+        'taken_status',
     ];
 
     public function patient(){

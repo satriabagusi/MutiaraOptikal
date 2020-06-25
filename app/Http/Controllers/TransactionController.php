@@ -117,6 +117,7 @@ class TransactionController extends Controller
             'id_patient' => $request['id_pasien'],
             'id_frame' => $request['id_frame'],
             'updated_by' => $request['id_user'],
+            'taken_status' => 0,
         ]);
 
         DB::transaction(function() use ($request){
@@ -177,8 +178,11 @@ class TransactionController extends Controller
             $transactions = Transaction::find($request->id_transaksi);
             $transactions->total_pay = $transactions->total_pay + $request['pembayaran'];
             $transactions->updated_by = Auth::id();
+            $transactions->taken_status = 1;
             $transactions->save();
         });
+
+        return redirect('/')->with('message', 'Transaksi selesai, kacamata telah diambil pelanggan.');
     }
 
     /**

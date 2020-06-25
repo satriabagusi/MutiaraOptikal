@@ -136,16 +136,14 @@
                                         <span class="input-group-text">Rp.</span>
                                       </div>
                                       <input type="text" name="pembayaran" class="form-control @error('pembayaran') is-invalid @enderror"  id="inputKonfirmasiPembayaran" value={{old('pembayaran')}}>
-                                      @error('pembayaran')
-                                      <span class="invalid-feedback" role="alert">
-                                          <strong>{{ $message }}</strong>
+                                      <span id="totalPay" class="invalid-feedback" style="display: none;" role="alert">
+                                          <strong>Pembayaran harus sesuai dengan jumlah yang dibayarkan</strong>
                                       </span>
-                                      @enderror
                                     </div>
                                   </div>
-                                  <input type="text" name="id_transaksi" id="id_transaksi">
+                                  <input type="hidden" name="id_transaksi" id="id_transaksi">
                                 </div>
-                                <button type="submit" class="btn btn-danger">LUNAS / AMBIL KACAMATA</button>
+                                <button type="submit" name="btnSubmit" class="btn btn-danger">LUNAS / AMBIL KACAMATA</button>
                                 <p for="" class="small text-danger">klik lunas jika sudah sesuai</p>
                               </form>
                         </div>
