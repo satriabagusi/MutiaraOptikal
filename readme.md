@@ -1,3 +1,9 @@
+<p>Aplikasi Penjualan Mutiara Optikal, aplikasi ini mengatur stock kacamata dan melaporkan total penjualan.</p>
+
+
+<p>Aplikasi ini berbasis Web dengan menggunakan bahasa pemrograman PHP, dan menggunakan framework PHP Laravel</p>
+
+
 <p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
 
 <p align="center">
