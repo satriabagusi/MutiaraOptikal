@@ -32,6 +32,21 @@ $('.toast').toast('show');
 
             }
           });
+
+          $("#total_pay").change(function(){
+            var total_pay = $("#total_pay").val().replace(/\./g, '');
+            var total_transaction = $("#total_transaction").val().replace(/\./g, '');
+            if(Number(total_pay) > Number(total_transaction)){
+              $("#totalPay").show();
+              $("#total_pay").addClass("is-invalid");
+              $("btnSubmit").attr("disabled", "disabled");
+              $("button[name='btnSubmit']").attr("disabled", "disabled").removeClass("btn-primary").addClass("btn-danger").button('refresh');
+            }else{
+              $("#totalPay").hide();
+              $("#total_pay").removeClass("is-invalid");
+              $("button[name='btnSubmit']").removeAttr("disabled").removeClass("btn-danger").addClass("btn-primary").button('refresh');
+            }
+          });
         });
 
       $("#id_pasien").change(function(){
@@ -95,6 +110,11 @@ $('.toast').toast('show');
       });
 
       $(document).ready(function () {
+        if( $("#inputKonfirmasiPembayaran").hasClass("is-invalid")){
+          $("#card-detail").slideDown("slow");
+        }else{
+
+
         $('.btn-repayment').click(function () {
           $("#card-detail").slideUp("fast");
           $("#loading-wait").hide();
@@ -119,6 +139,7 @@ $('.toast').toast('show');
                   // console.log(data);
                   console.log(data[0]);
                   $("#card-detail").slideDown("slow");
+                  $("#id_transaksi").val(data[0].id)
                   $("#inputNama").val(data[0].patient.nama_pasien);
                   $("#inputNoHP").val(data[0].patient.no_hp);
                   $("#inputNoBPJS").val(data[0].patient.no_bpjs);
@@ -136,6 +157,7 @@ $('.toast').toast('show');
               }
             });
         });
+      }
       });
 
       function closeCard(){

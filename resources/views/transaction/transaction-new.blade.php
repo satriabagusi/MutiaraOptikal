@@ -177,15 +177,13 @@
                   <div class="form-group">
                   <label for="total_pay">Total Pembayaran</label>
                   <div class="input-group mb-3">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Rp. </span>
+                    <div class="input-group-prepend ">
+                        <span class="input-group-text ">Rp. </span>
                     </div>
-                  <input type="total_pay" class="form-control @error('total_pay') is-invalid @enderror" placeholder="-" name="total_pay" id="total_pay" autocomplete="off"  value={{old('total_pay')}}>
-                  @error('total_pay')
-                      <span class="invalid-feedback" role="alert">
-                          <strong>{{ $message }}</strong>
+                  <input type="total_pay" class="form-control " placeholder="-" name="total_pay" id="total_pay" autocomplete="off" >
+                      <span class="invalid-feedback" id="totalPay" role="alert" style="display: none;">
+                          <strong>Total Bayar melebihi Total Transaksi </strong>
                       </span>
-                  @enderror
                   </div>
                 </div>
               </div>
@@ -197,7 +195,7 @@
             </div>
 
               <div class="row justify-content-end">
-                <button type="submit" class="btn btn-primary shadow-sm"><i class="fas fa-plus-circle"></i> Simpan Transaksi
+                <button type="submit" name="btnSubmit" id="btnSubmit" class="btn btn-primary shadow-sm"><i class="fas fa-plus-circle"></i> Tambah Transaksi
                 </button>
               </div>
           </form>

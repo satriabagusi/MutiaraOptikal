@@ -37,3 +37,4 @@ Route::get('/transaction/list-transaction', 'TransactionController@index');
 Route::get('/transaction/detail/{id}', 'TransactionController@show')->name('getDetailTransaction');
 Route::get('/transaction/repayment/', 'TransactionController@edit')->name('repayment');
 Route::get('/transaction/detail/repayment/{id}', 'TransactionController@getDetailRepayment')->name('getDetailTransaction');
+Route::post('/transaction/repayment/update', 'TransactionController@update')->name('save-repayment');

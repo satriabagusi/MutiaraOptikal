@@ -51,7 +51,9 @@
                         </button>
                       </div>
                         <div class="card-body">
-                            <form>
+                            <form action="{{route('save-repayment')}}" method="POST">
+                              @csrf
+                              
                                 <div class="form-row">
                                   <input type="hidden" name="no_transaksi">
                                   <div class="form-group col-md-4">
@@ -124,7 +126,7 @@
                                       <div class="input-group-prepend">
                                         <span class="input-group-text">Rp.</span>
                                       </div>
-                                      <input type="text" class="form-control"  id="inputPembayaran" readonly>
+                                      <input type="text" name="total_bayar" class="form-control"  id="inputPembayaran" readonly>
                                     </div>
                                   </div>
                                   <div class="form-group col-md-6">
@@ -133,9 +135,15 @@
                                       <div class="input-group-prepend">
                                         <span class="input-group-text">Rp.</span>
                                       </div>
-                                      <input type="text" class="form-control"  id="inputKonfirmasiPembayaran">
+                                      <input type="text" name="pembayaran" class="form-control @error('pembayaran') is-invalid @enderror"  id="inputKonfirmasiPembayaran" value={{old('pembayaran')}}>
+                                      @error('pembayaran')
+                                      <span class="invalid-feedback" role="alert">
+                                          <strong>{{ $message }}</strong>
+                                      </span>
+                                      @enderror
                                     </div>
                                   </div>
+                                  <input type="text" name="id_transaksi" id="id_transaksi">
                                 </div>
                                 <button type="submit" class="btn btn-danger">LUNAS / AMBIL KACAMATA</button>
                                 <p for="" class="small text-danger">klik lunas jika sudah sesuai</p>

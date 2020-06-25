@@ -64,9 +64,8 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
+        
 
-        // ]);
         if($request['total_pay'] == $request['total_transaction']){
             $status = 0;
         }else{
@@ -80,16 +79,21 @@ class TransactionController extends Controller
 
         // no transaksi based on date from timestamp and id
         $date = date('dmY');
-        $get_id = Transaction::select('id')->get()->last()->id;
+        $chekTransaction = Transaction::all();
+        if(count((array)$chekTransaction) > 0){
+            $get_id = Transaction::select('id')->get()->last()->id + 1;
+        }else{
+            $get_id = 1;
+        }
         $id = "0000".$get_id;
-        if($get_id > 99){
-            if ($get_id <= 999 ) {
+        if($get_id > 9){
+            if ($get_id <= 99 ) {
                 $id = substr($id, 1);
-            }elseif ($get_id <= 9999) {
+            }elseif ($get_id <= 999) {
                 $id = substr($id, 2);
-            }elseif ($get_id <= 99999) {
+            }elseif ($get_id <= 9999) {
                 $id = substr($id, 3);
-            }elseif($get_id > 99999){
+            }elseif($get_id > 9999){
                 $id = $get_id;
             }
         }
@@ -111,7 +115,8 @@ class TransactionController extends Controller
             'keterangan' => $request['keterangan'],
             'id_user' => $request['id_user'],
             'id_patient' => $request['id_pasien'],
-            'id_frame' => $request['id_frame']
+            'id_frame' => $request['id_frame'],
+            'updated_by' => $request['id_user'],
         ]);
 
         DB::transaction(function() use ($request){
@@ -120,8 +125,8 @@ class TransactionController extends Controller
             $frame->save();
         });
 
-
-        return redirect('/transaction/print/'.++$get_id);
+        $last_id = Transaction::select('id')->get()->last()->id;
+        return redirect('/transaction/print/'.$last_id);
     }
 
     /**
@@ -161,7 +166,19 @@ class TransactionController extends Controller
      */
     public function update(Request $request, Transaction $transaction)
     {
-        // Transaction::where('no_transaksi', $request['no_transaksi'])
+        // return $request->id_transaksi;
+
+        $request->validate([
+            'pembayaran' => 'required|same:total_bayar',
+            ]);
+
+
+        DB::transaction(function() use ($request){
+            $transactions = Transaction::find($request->id_transaksi);
+            $transactions->total_pay = $transactions->total_pay + $request['pembayaran'];
+            $transactions->updated_by = Auth::id();
+            $transactions->save();
+        });
     }
 
     /**

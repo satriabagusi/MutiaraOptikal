@@ -29,6 +29,7 @@ class CreateTransactionsTable extends Migration
             $table->foreign('id_user')->references('id')->on('users');
             $table->foreign('id_patient')->references('id')->on('patients');
             $table->foreign('id_frame')->references('id')->on('frame_types');
+            $table->foreign('updated_by')->references('id')->on('users');
             $table->timestamps();
         });
     }
