@@ -88,7 +88,7 @@
                             Menampilkan {{$patients->count()}} 
                             Dari {{$patients->total()}} data
                         </div>
-                        <div class="col-2">
+                        <div class="col-4">
                             {{$patients->links()}}
                         </div>
                         

@@ -21,8 +21,11 @@ class PagesController extends Controller
                 $day = date('d');
                 $funds_month = Transaction::select('total_transaction')->whereMonth('created_at', $month)->get()->sum('total_transaction');
                 $funds_day = Transaction::select('total_transaction')->whereDay('created_at', $day)->get()->sum('total_transaction');
-                $dp = Transaction::where('transaction_status', 1)->count();
-                return view('index', compact('dp', 'funds_month', 'funds_day'));
+                $dp = Transaction::where('transaction_status', 0)->count();
+                $lunas = Transaction::where('transaction_status', 1)->count();
+                $all = Transaction::select('transaction_status')->count();
+                $total_lunas = $lunas / $all * 100;
+                return view('index', compact('dp', 'funds_month', 'funds_day', 'total_lunas', 'lunas', 'all'));
             }else{
                 return view('transaction.transaction-home');
             }

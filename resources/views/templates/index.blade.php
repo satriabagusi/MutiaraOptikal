@@ -270,20 +270,51 @@
         </button>
       </div>
       <div class="modal-body">
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 28rem;">
           <div class="card-header">
-            Detail Transaksi
+            Detail Transaksi <b id="title_name" class="text-info">Pasien</b>
+            <br>
+            Nomor Transaksi <b id="title_no_transaction" class="text-warning"></b>
           </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">Cras justo odio</li>
-            <li class="list-group-item">Dapibus ac facilisis in</li>
-            <li class="list-group-item">Vestibulum at eros</li>
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Lensa
+              <span class="font-weight-bold" id="lens_type"></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Jenis Frame
+              <span class="font-weight-bold" id="frame_type"></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Total DP/Bayar
+              <span class="font-weight-bold" id="total_pay"></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Total Transaksi
+              <span class="font-weight-bold" id="total_transaction"></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              BPJS ?
+              <span class="font-weight-bolder" id="bpjs_status"></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Transaksi Ditangani oleh :
+              <span class="font-weight-bold" id="employee_name"></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Tanggal Transaksi :
+              <span class="font-weight-bold" id="created_at"></span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Tanggal Pengambilan :
+              <span class="font-weight-bold" id="updated_at"></span>
+            </li>
+            
           </ul>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Understood</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
       </div>
     </div>
   </div>

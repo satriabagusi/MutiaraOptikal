@@ -35,8 +35,8 @@
                     <div class="card text-center" style="width: 18rem;">
                         <div class="card-body">
                           <h2 class="card-title"><i class="text-success fas fa-edit"></i></h2>
-                          <p class="card-text">Transaksi Baru</p>
-                          <a href="/transaction/new-transaction" class="btn btn-success"><i class=" fas fa-edit"></i> Buat Transaksi Baru</a>
+                          <p class="card-text lead">Transaksi Baru</p>
+                          <a href="/transaction/new-transaction" class="btn btn-success "><i class=" fas fa-edit"></i> Buat Transaksi Baru</a>
                         </div>
                       </div>
                 </div>
@@ -62,8 +62,8 @@
                   <div class="card text-center" style="width: 18rem;">
                       <div class="card-body">
                         <h2 class="card-title"><i class="text-danger fas fa-list-ul"></i></h2>
-                        <p class="card-text">Daftar Transaksi</p>
-                        <a href="/patient/new-patient" class="btn btn-danger"><i class="fas fa-user-edit"></i> Daftar Transaksi</a>
+                        <p class="card-text">Cetak Resi Transaksi</p>
+                        <a href="/patient/new-patient" class="btn btn-danger"><i class="fas fa-list-ul"></i> Daftar Transaksi</a>
                       </div>
                     </div>
               </div>

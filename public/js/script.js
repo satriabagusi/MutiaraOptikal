@@ -47,7 +47,7 @@ $('.toast').toast('show');
               $("button[name='btnSubmit']").removeAttr("disabled").removeClass("btn-danger").addClass("btn-primary").button('refresh');
             }
           });
-        });
+        
 
       $("#id_pasien").change(function(){
         var id = $(this).val();
@@ -92,7 +92,6 @@ $('.toast').toast('show');
         console.log("total : "+ frame_price + " + " + lens_price + " = " + total);
       });
 
-      $(document).ready(function () {
         $('.detail-data').click(function () {
             var transaction_id = $(this).attr("id");
             var url = '/transaction/detail/:id';
@@ -103,13 +102,29 @@ $('.toast').toast('show');
               dataType: "json",
               success:function(data){
                 console.log(data);
+                $("#title_name").text(data[0].patient.nama_pasien);
+                $("#title_no_transaction").text(data[0].no_transaksi);
+                $("#lens_type").text(data[0].lens_type);
+                $("#frame_type").text(data[0].frame_type.frame_type);
+                $("#total_pay").text(data[0].total_pay).mask('000.000.000', {reverse: true});
+                $("#total_transaction").text(data[0].total_transaction).mask('000.000.000', {reverse: true});
+                $("#employee_name").text(data[0].user.name);
+                $("#created_at").text(data[0].created_at);
+                if(data[0].updated_at === data[0].created_at){
+                  $("#updated_at").text("Kacamata Belum diambil").addClass("text-warning");
+                }else{
+                  $("#updated_at").text(data[0].updated_at).removeClass("text-warning");
+                }
+                if(data[0].bpjs_status === 1){
+                  $("#bpjs_status").text("✓").addClass("text-success").removeClass("text-danger");
+                }else{
+                  $("#bpjs_status").text("✗").addClass("text-danger").removeClass("text-success");
+                }
               }
               
             });
         });
-      });
 
-      $(document).ready(function () {
 
           $("#inputKonfirmasiPembayaran").keyup(function(){
             var konfirmasiBayar = $("#inputKonfirmasiPembayaran").val().replace(/\./g, '');
@@ -144,33 +159,41 @@ $('.toast').toast('show');
                   Swal.fire({
                     icon: 'error',
                     title: 'Transaksi tidak ditemukan!',
-                    text: 'Nomor transaksi '+transaction_id+' tidak ditemukan, silahkan cek kembali!',
+                    html: 'Nomor transaksi <b>'+transaction_id+'</b> tidak ditemukan, silahkan cek kembali!',
                   }),
                   $("#loading-wait").hide();
                 }else{
-                  // console.log(data);
-                  console.log(data[0]);
-                  $("#card-detail").slideDown("slow");
-                  $("#id_transaksi").val(data[0].id)
-                  $("#inputNama").val(data[0].patient.nama_pasien);
-                  $("#inputNoHP").val(data[0].patient.no_hp);
-                  $("#inputNoBPJS").val(data[0].patient.no_bpjs);
-                  $("#inputJenisLensa").val(data[0].lens_type);
-                  $("#inputHargaLensa").val(data[0].lens_price).mask('000.000.000', {reverse: true});
-                  $("#inputTipeFrame").val(data[0].frame_type.frame_type);
-                  $("#inputHargaFrame").val(data[0].frame_type.price).mask('000.000.000', {reverse: true});
-                  $("#inputBayarAwal").val(data[0].total_pay).mask('000.000.000', {reverse: true});
-                  $("#inputTotalTransaksi").val(data[0].total_transaction).mask('000.000.000', {reverse: true});
-                  $("#inputPembayaran").val(data[0].total_transaction - data[0].total_pay).mask('000.000.000', {reverse: true});
-                  $("#inputKonfirmasiPembayaran").mask('000.000.000', {reverse: true});
+                if(data[0].taken_status === 1){
+                  Swal.fire({
+                    title: 'Transaksi Selesai',
+                    icon: 'info',
+                    html:
+                      'Kacamata dengan nomor Transaksi <b>'+transaction_id+'</b>'
+                      +
+                      ' sudah diambil !',
+                  })
                   $("#loading-wait").hide();
-
+                }else{
+                    // console.log(data);
+                    console.log(data[0]);
+                    $("#card-detail").slideDown("slow");
+                    $("#id_transaksi").val(data[0].id)
+                    $("#inputNama").val(data[0].patient.nama_pasien);
+                    $("#inputNoHP").val(data[0].patient.no_hp);
+                    $("#inputNoBPJS").val(data[0].patient.no_bpjs);
+                    $("#inputJenisLensa").val(data[0].lens_type);
+                    $("#inputHargaLensa").val(data[0].lens_price).mask('000.000.000', {reverse: true});
+                    $("#inputTipeFrame").val(data[0].frame_type.frame_type);
+                    $("#inputHargaFrame").val(data[0].frame_type.price).mask('000.000.000', {reverse: true});
+                    $("#inputBayarAwal").val(data[0].total_pay).mask('000.000.000', {reverse: true});
+                    $("#inputTotalTransaksi").val(data[0].total_transaction).mask('000.000.000', {reverse: true});
+                    $("#inputPembayaran").val(data[0].total_transaction - data[0].total_pay).mask('000.000.000', {reverse: true});
+                    $("#inputKonfirmasiPembayaran").mask('000.000.000', {reverse: true});
+                    $("#loading-wait").hide();
+                  }
                 }
               }
             });
         });
-      });
 
-      function closeCard(){
-        $("#card-detail").slideUp("slow");
-      }
+      });

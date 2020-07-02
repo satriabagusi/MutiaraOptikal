@@ -58,7 +58,7 @@
                             @endif
                             @if ($transaction->transaction_status == "0")
                                 <td align="center">
-                                    <b class="text-success">LUNAS</b>
+                                    <b class="text-danger">BELUM LUNAS</b>
                                 </td>
                                 <td width="16%">
                                     <button href="" class="btn btn-sm btn-success" disabled>Ubah Data</button>
@@ -68,14 +68,14 @@
                                 </td>
                             @else
                                 <td align="">
-                                    <b class="text-danger">BELUM LUNAS</b>
+                                    <b class="text-success">LUNAS</b>
                                 </td>
                             </td>
                             <td width="16%">
-                                <a href="" class="btn btn-sm btn-success">Ubah Data</a>
-                                <a class="btn btn-sm btn-info detail-data" href="#" data-toggle="modal" data-target="#detailTransaksi" id="{{$transaction->id}}">
+                                <button class="btn btn-sm btn-success">Ubah Data</button>
+                                <button class="btn btn-sm btn-info detail-data" href="#" data-toggle="modal" data-target="#detailTransaksi" id="{{$transaction->id}}">
                                     Detail
-                                  </a>
+                                </button>
                             </td>
                             @endif
                             

@@ -67,9 +67,9 @@ class TransactionController extends Controller
         
 
         if($request['total_pay'] == $request['total_transaction']){
-            $status = 0;
-        }else{
             $status = 1;
+        }else{
+            $status = 0;
         }
 
         // remove dot from string value 
@@ -138,9 +138,16 @@ class TransactionController extends Controller
      */
     public function show($id)
     {
-        $transactions = Transaction::where('id', $id)->first();
-        echo json_encode($transactions);
+        $transactions = Transaction::where('id', $id)
+        ->with('patient')
+        ->with('user')
+        ->with('frame_type')
+        ->get();
+        return response()->json($transactions);
         exit;
+
+        
+
     }
 
     /**
@@ -179,6 +186,7 @@ class TransactionController extends Controller
             $transactions->total_pay = $transactions->total_pay + $request['pembayaran'];
             $transactions->updated_by = Auth::id();
             $transactions->taken_status = 1;
+            $transactions->transaction_status = 1;
             $transactions->save();
         });
 
