@@ -38,3 +38,4 @@ Route::get('/transaction/detail/{id}', 'TransactionController@show')->name('getD
 Route::get('/transaction/repayment/', 'TransactionController@edit')->name('repayment');
 Route::get('/transaction/detail/repayment/{id}', 'TransactionController@getDetailRepayment')->name('getDetailTransaction');
 Route::post('/transaction/repayment/update', 'TransactionController@update')->name('save-repayment');
+Route::get('/transaction/receipt/find', 'TransactionController@findReceipt');

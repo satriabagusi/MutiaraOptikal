@@ -196,4 +196,64 @@ $('.toast').toast('show');
             });
         });
 
+        $('.btn-receipt').click(function () {
+          $("#receipt-detail").slideUp("fast");
+          $("#loading-wait").hide();
+          $("#loading-wait").show();
+
+            var transaction_id = $('#id').val();
+            var url = '/transaction/detail/repayment/:id';
+            url = url.replace(':id', transaction_id);
+            $.ajax({
+              url:url,
+              method: "get",
+              dataType: "json",
+              success:function(data){
+                if(Object.keys(data).length === 0){
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Transaksi tidak ditemukan!',
+                    html: 'Nomor transaksi <b>'+transaction_id+'</b> tidak ditemukan, silahkan cek kembali!',
+                  }),
+                  $("#loading-wait").hide();
+                }else{
+                if(data[0].taken_status === 1){
+                  Swal.fire({
+                    title: 'Transaksi Selesai',
+                    icon: 'info',
+                    html:
+                      'Kacamata dengan nomor Transaksi <b>'+transaction_id+'</b>'
+                      +
+                      ' sudah diambil !',
+                  })
+                  $("#loading-wait").hide();
+                }else{
+                    // console.log(data);
+                    console.log(data[0]);
+                    $("#receipt-detail").slideDown("slow");
+                    $("#no_transaksi").text(data[0].no_transaksi);
+                    $("#inputNama").val(data[0].patient.nama_pasien);
+                    $("#inputNoHP").val(data[0].patient.no_hp);
+                    
+                    $("#inputTipeLensa").val(data[0].lens_type);
+                    $("#inputHargaLensa").val(data[0].lens_price).mask('000.000.000', {reverse: true});
+                    $("#inputTipeFrame").val(data[0].frame_type.frame_type);
+                    $("#inputHargaFrame").val(data[0].frame_type.price).mask('000.000.000', {reverse: true});
+                    $("#inputTotal").val(data[0].total_transaction).mask('000.000.000', {reverse: true});
+
+                    $("#print-btn").attr("href", "/transaction/print/"+data[0].id);
+
+                    if(data[0].bpjs_status === 1){
+                      $("#bpjs_status").val("Transaksi Dengan BPJS");
+                    }else{
+                      $("#bpjs_status").val("Transaksi non BPJS");
+                    }
+
+                    $("#loading-wait").hide();
+                  }
+                }
+              }
+            });
+        });
+
       });

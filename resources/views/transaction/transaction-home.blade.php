@@ -61,9 +61,9 @@
                 <div class="col-auto">
                   <div class="card text-center" style="width: 18rem;">
                       <div class="card-body">
-                        <h2 class="card-title"><i class="text-danger fas fa-list-ul"></i></h2>
+                        <h2 class="card-title"><i class="text-danger fas fa-print"></i></h2>
                         <p class="card-text">Cetak Resi Transaksi</p>
-                        <a href="/patient/new-patient" class="btn btn-danger"><i class="fas fa-list-ul"></i> Daftar Transaksi</a>
+                        <a href="/transaction/receipt/find" class="btn btn-danger"><i class="fas fa-print"></i> Cetak Transaksi</a>
                       </div>
                     </div>
               </div>

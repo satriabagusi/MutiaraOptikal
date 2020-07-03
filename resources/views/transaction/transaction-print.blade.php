@@ -187,10 +187,10 @@
               <td>PV</td>
             </tr>
             <tr>
-            <td><strong>L</strong></td>
+            <td><strong>R</strong></td>
             </tr>
             <tr>
-              <td><strong>R</strong></td>
+              <td><strong>L</strong></td>
             </tr> 
 
           </tbody>

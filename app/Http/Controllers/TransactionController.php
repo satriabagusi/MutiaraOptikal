@@ -250,4 +250,8 @@ class TransactionController extends Controller
         }
         exit;
     }
+
+    public function findReceipt(Request $request){
+        return view('transaction.transaction-receipt');
+    }
 }
